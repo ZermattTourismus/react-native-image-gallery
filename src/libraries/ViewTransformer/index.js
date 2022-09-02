@@ -117,6 +117,11 @@ export default class ViewTransformer extends React.Component {
             translateX: this.state.translateX,
             translateY: this.state.translateY
         });
+        if(this?.props?.initialZoomEnabled!==prevProps?.initialZoomEnabled ){
+            setTimeout(()=>{
+                this.performDoubleTapUp(50,0)
+            },1000)
+        }
     }
 
     componentWillUnmount () {

@@ -18,6 +18,7 @@ export default class TransformableImage extends PureComponent {
         enableTransform: PropTypes.bool,
         enableScale: PropTypes.bool,
         enableTranslate: PropTypes.bool,
+        initialZoomEnabled: PropTypes.bool,
         onTransformGestureReleased: PropTypes.func,
         onViewTransformed: PropTypes.func,
         imageComponent: PropTypes.func,
@@ -47,7 +48,8 @@ export default class TransformableImage extends PureComponent {
             viewHeight: 0,
             imageLoaded: false,
             imageDimensions: props.image.dimensions,
-            keyAcumulator: 1
+            keyAcumulator: 1,
+            initialZoomEnabled:null
         };
     }
 
@@ -85,7 +87,7 @@ export default class TransformableImage extends PureComponent {
     onLoad (e) {
         this.props.onLoad && this.props.onLoad(e);
         if (!this.state.imageLoaded) {
-            this.setState({ imageLoaded: true });
+            this.setState({ imageLoaded: true,initialZoomEnabled:this?.props?.initialZoomEnabled });
         }
     }
 
@@ -187,6 +189,7 @@ export default class TransformableImage extends PureComponent {
               maxScale={maxScale}
               contentAspectRatio={contentAspectRatio}
               onLayout={this.onLayout}
+              initialZoomEnabled={this.state?.initialZoomEnabled}
               style={style}>
                 { error ? this.renderError() : content }
             </ViewTransformer>

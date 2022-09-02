@@ -23,6 +23,7 @@ export default class Gallery extends PureComponent {
         onGalleryStateChanged: PropTypes.func,
         onLongPress: PropTypes.func,
         removeClippedSubviews: PropTypes.bool,
+        initialZoomEnabled: PropTypes.bool,
         imageComponent: PropTypes.func,
         errorComponent: PropTypes.func,
         flatListProps: PropTypes.object
@@ -240,6 +241,8 @@ export default class Gallery extends PureComponent {
               errorComponent={errorComponent}
               imageComponent={imageComponent}
               image={pageData}
+              initialZoomEnabled={this?.props?.initialZoomEnabled}
+
             />
         );
     }
