@@ -139,7 +139,7 @@ export default class ViewPager extends PureComponent {
     onAutoScroll(){
         if(this.props.isAutoScrollEnabled){
             this.interval = setInterval(() => {
-                console.log('called!',this.currentIndex,this.props.timer)
+                console.log('called! from repo',this.currentIndex,this.props.timer)
 
                 if(this.props.pageDataArray.length>this.currentIndex+1){
                 this.currentIndex = this.currentIndex + 1
