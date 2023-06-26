@@ -145,7 +145,7 @@ export default class ViewPager extends PureComponent {
                 }else{                        
                     this.currentIndex=0
                 }
-                this.refs['innerFlatList'].scrollToIndex({index:this.currentIndex});
+                this.refs['innerFlatList'] && this.refs['innerFlatList'].scrollToIndex({index:this.currentIndex});
 
                
         }, this.props.timer);
