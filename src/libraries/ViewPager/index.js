@@ -42,7 +42,7 @@ export default class ViewPager extends PureComponent {
         removeClippedSubviews: true,
         flatListProps: {},
         isAutoScrollEnabled: false,
-        timer:3000
+        timer:5000
     };
     interval = null
     currentPage = undefined; // Do not initialize to make onPageSelected(0) be dispatched
