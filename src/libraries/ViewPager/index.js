@@ -40,13 +40,16 @@ export default class ViewPager extends PureComponent {
         pageDataArray: [],
         initialListSize: 10,
         removeClippedSubviews: true,
-        flatListProps: {}
+        flatListProps: {},
+        isAutoScrollEnabled: false,
+        timer:3000
     };
-
+    interval = null
     currentPage = undefined; // Do not initialize to make onPageSelected(0) be dispatched
     layoutChanged = false;
     activeGesture = false;
     gestureResponder = undefined;
+    currentIndex= 0;
 
     state = { width, height };
 
@@ -116,6 +119,10 @@ export default class ViewPager extends PureComponent {
             this.scrollByOffset(1);
             this.scrollByOffset(-1);
         });
+                this.onAutoScroll()
+    }
+        componentWillUnmount(){
+        this.interval=null
     }
 
     componentDidUpdate (prevProps) {
@@ -129,7 +136,22 @@ export default class ViewPager extends PureComponent {
             this.scrollToPage(this.props.pageDataArray.length, true);
         }
     }
+    onAutoScroll(){
+        if(this.props.isAutoScrollEnabled){
+            this.interval = setInterval(() => {
+                console.log('called!',this.currentIndex,this.props.timer)
 
+                if(this.props.pageDataArray.length>this.currentIndex+1){
+                this.currentIndex = this.currentIndex + 1
+                }else{                        
+                    this.currentIndex=0
+                }
+                this.refs['innerFlatList'].scrollToIndex({index:this.currentIndex});
+
+               
+        }, this.props.timer);
+        }
+    }
     onLayout (e) {
         let { width, height } = e.nativeEvent.layout;
         let sizeChanged = this.state.width !== width || this.state.height !== height;
